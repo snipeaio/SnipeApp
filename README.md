@@ -1,3 +1,3 @@
 # SnipeApp
 Basis of the Snipe App
-Commit tesst
+By Rakshan Joshi and Shabarish Nair
