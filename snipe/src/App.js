@@ -1,13 +1,22 @@
 import React from 'react';
 import SearchBar from './Components/SearchBar';
+import StockXComp from './Components/StockXPrices';
 import "./App.css";
 
-function App() {
-  return (
+class App extends React.Component {
+
+  render(){
+    return (
     <div className = "App">
-        <SearchBar placeholder = "Enter a SKU"/>
+      <section className = "SearchBar">
+          <SearchBar placeholder = "Enter a SKU"/>
+      </section>
+      <section className = "StockX">
+        <StockXComp />
+      </section>
     </div>
-  );
+    )
+  }
 }
 
 export default App

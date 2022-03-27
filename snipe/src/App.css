@@ -1,3 +1,11 @@
 .App {
+  background-color: red;
+}
+
+.SearchBar {
   background-color: aqua;
+}
+
+.StockX {
+  background-color: green;
 }

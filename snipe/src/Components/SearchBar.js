@@ -2,6 +2,7 @@ import React from 'react';
 import "./Styles/SearchBar.css";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import { FindProduct, GetPrices } from './StockXScraper';
 
 class SearchBar extends React.Component {
   constructor(props){
@@ -17,9 +18,15 @@ class SearchBar extends React.Component {
     this.setState({value: event.target.value});
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
+    let responseJSON = await FindProduct(this.state.value)
+    let firstProduct = responseJSON['Products'][0];
+    console.log(firstProduct)
+    window.product = firstProduct;
+    let sizePriceData = GetPrices(firstProduct)
+
   }
 
   clearInput() {
@@ -43,7 +50,8 @@ class SearchBar extends React.Component {
         <div className = "dataResult"></div>
       </form>
     </div>
-  )
+    )
   }
 }
+
 export default SearchBar
