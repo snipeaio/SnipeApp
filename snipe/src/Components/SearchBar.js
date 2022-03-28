@@ -2,7 +2,7 @@ import React from 'react';
 import "./Styles/SearchBar.css";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
-import { FindProduct, GetPrices } from './StockXScraper';
+import { FindProductX, GetPricesX, FilterDataX, GetSkuX} from './StockXScraper';
 
 class SearchBar extends React.Component {
   constructor(props){
@@ -21,11 +21,19 @@ class SearchBar extends React.Component {
   async handleSubmit(event) {
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
-    let responseJSON = await FindProduct(this.state.value)
+
+    //StockX code for calling functions that find product and find product data
+    let responseJSON = await FindProductX(this.state.value)
     let firstProduct = responseJSON['Products'][0];
     console.log(firstProduct)
     window.product = firstProduct;
-    let sizePriceData = GetPrices(firstProduct)
+    let unfilteredData = await GetPricesX(firstProduct)
+    console.log(unfilteredData)
+    let sku = GetSkuX(unfilteredData);
+    console.log(sku)
+    let stockXPrices = FilterDataX(unfilteredData);
+    console.log(stockXPrices)
+    //Goat code for calling functions that find product and find product data
 
   }
 
