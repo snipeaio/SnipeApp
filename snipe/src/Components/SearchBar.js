@@ -3,12 +3,10 @@ import "./Styles/SearchBar.css";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import { FindProductX, GetPricesX, FilterDataX, GetSkuX} from './StockXScraper';
-
 class SearchBar extends React.Component {
   constructor(props){
-    super(props)
-    this.state = {value: ''}
-
+    super(props);
+    this.state = {value: ''};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearInput = this.clearInput.bind(this);
@@ -32,9 +30,11 @@ class SearchBar extends React.Component {
     let sku = GetSkuX(unfilteredData);
     console.log(sku)
     let stockXPrices = FilterDataX(unfilteredData);
-    console.log(stockXPrices)
+    window.stockXPrices = stockXPrices
+    console.log(window.stockXPrices);
+    this.props.handler(window.stockXPrices)
     //Goat code for calling functions that find product and find product data
-
+    
   }
 
   clearInput() {
@@ -43,21 +43,25 @@ class SearchBar extends React.Component {
 
   render(){
     return (
-    <div className = "search">
-      <form onSubmit = {this.handleSubmit}>
-        <div className = "searchInputs">
-          <input type =  "text" placeholder = {this.props.placeholder} value ={this.state.value} onChange = {this.handleChange}/>
-          <div className = "searchIcon">
-            {this.state.value.length === 0 ? (
-              <SearchIcon onClick = {this.handleSubmit}/>
-             ) : (
-              <CloseIcon id = "clearBtn" onClick = {this.clearInput}/>
-             )}
-          </div>
-        </div>
-        <div className = "dataResult"></div>
-      </form>
-    </div>
+      <div>        
+        <section className = "search">
+          <form onSubmit = {this.handleSubmit}>
+            <div className = "searchInputs">
+              <input type =  "text" placeholder = {this.props.placeholder} value ={this.state.value} onChange = {this.handleChange}/>
+              <div className = "searchIcon">
+                {this.state.value.length === 0 ? (
+                  <SearchIcon onClick = {this.handleSubmit}/>
+                ) : (
+                  <CloseIcon id = "clearBtn" onClick = {this.clearInput}/>
+                )}
+              </div>
+            </div>
+            <div className = "dataResult"></div>
+          </form>
+        </section>
+      </div>
+
+    
     )
   }
 }
