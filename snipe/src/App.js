@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBar from './Components/SearchBar';
-import StockXComp from './Components/StockXComp';
+import DataComp from './Components/DataComp';
 import "./App.css";
 
 
@@ -8,15 +8,18 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      data: window.stockXPrices
+      data: window.newDataStorageModel,
+      sku: window.SKU
     }
 
     this.handler = this.handler.bind(this)
   }
 
   handler(newState){
+    console.log(newState.data)
     this.setState({
-      data: newState
+      data: newState.data,
+      sku: newState.sku
     })
   }
 
@@ -27,7 +30,7 @@ class App extends React.Component {
           <SearchBar placeholder = "Enter a SKU" table = {this.table} handler = {this.handler}/>
       </section>
       <section className = "StockX">
-        <StockXComp data = {this.state.data}/>
+        <DataComp data = {this.state.data} sku = {this.state.sku}/>
       </section>
     </div>
     )

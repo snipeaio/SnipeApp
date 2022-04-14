@@ -26,6 +26,25 @@ window.stockXPrices = [{size: '4', highestBid: null, lowestAsk: null},{size: '4.
 {size: '15', highestBid: null, lowestAsk: null},
 {size: '16', highestBid: null, lowestAsk: null}]
 
+window.SKU = ""
+
+window.newDataStorageModel = {
+  '4' : {
+    'stockx' : {
+      highestBid : "n/a",
+      lowestAsk : "n/a"
+    },
+    "goat": {
+      highestBid : "n/a",
+      lowestAsk : "n/a"
+    },
+    "sg": {
+      highestBid: "n/a",
+      lowestAsk: "n/a"
+    }
+  }
+}
+
 ReactDOM.render(
   <App />,
   document.getElementById('root')

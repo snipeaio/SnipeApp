@@ -54,24 +54,32 @@ export function GetPricesX(productJSON){
 
 export function FilterDataX(data){
     let unfilPrices = data['data']['product']['variants'];
-    let filPrices = [];
+    console.log(unfilPrices)
+    let sizesAdded = [];
     
     for (let i = 0; i < unfilPrices.length; i++){
         let size = unfilPrices[i]['sizeChart']['baseSize'];
+        let hidden = unfilPrices[i]['hidden']
         let highestBid = unfilPrices[i]['market']['bidAskData']["highestBid"];
         let lowestAsk = unfilPrices[i]['market']['bidAskData']["lowestAsk"];
-        let sizePriceData = {
-            "size" : size,
-            "highestBid" : highestBid,
-            "lowestAsk"  : lowestAsk
+        
+        if (!sizesAdded.includes(size)){
+            window.newDataStorageModel[size]= {}
+            window.newDataStorageModel[size]['stockx'] = {
+                "highestBid" : ((!hidden && highestBid != null) ? highestBid : "n/a"),
+                "lowestAsk"  : ((!hidden && lowestAsk != null) ? lowestAsk : "n/a")
+            }
+            sizesAdded.push(size)
         }
-        filPrices.push(sizePriceData);
+
     }
 
-    return filPrices
+    return window.newDataStorageModel
 }
 
 export function GetSkuX(unfilteredData){
+    let shoeFacts = unfilteredData['data']['product']['traits']
     let sku = unfilteredData['data']['product']['styleId'];
-    return sku;
+
+    return [shoeFacts,sku];
 }

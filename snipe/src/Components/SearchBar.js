@@ -3,6 +3,9 @@ import "./Styles/SearchBar.css";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import { FindProductX, GetPricesX, FilterDataX, GetSkuX} from './StockXScraper';
+import { FilterDataGoat, FindProductGoat, GetIDGoat } from './GoatScraper';
+import { DataRequestSG, FilterSGData } from './SGScraper';
+
 class SearchBar extends React.Component {
   constructor(props){
     super(props);
@@ -23,18 +26,22 @@ class SearchBar extends React.Component {
     //StockX code for calling functions that find product and find product data
     let responseJSON = await FindProductX(this.state.value)
     let firstProduct = responseJSON['Products'][0];
-    console.log(firstProduct)
     window.product = firstProduct;
-    let unfilteredData = await GetPricesX(firstProduct)
-    console.log(unfilteredData)
-    let sku = GetSkuX(unfilteredData);
-    console.log(sku)
-    let stockXPrices = FilterDataX(unfilteredData);
-    window.stockXPrices = stockXPrices
-    console.log(window.stockXPrices);
-    this.props.handler(window.stockXPrices)
-    //Goat code for calling functions that find product and find product data
+    console.log(firstProduct)
     
+    let unfilteredXData = await GetPricesX(firstProduct)
+    let [shoeFacts,sku] = GetSkuX(unfilteredXData);
+    console.log(sku,shoeFacts)
+    let stockXPrices = await FilterDataX(unfilteredXData);
+    
+    //Goat code for calling functions that find product and find product data
+    let goatJSON = await FindProductGoat(sku);
+    let goatID = GetIDGoat(goatJSON);
+    let goatXData = await FilterDataGoat(goatID)
+
+    let sgData = await DataRequestSG(sku);
+    let sgGoatXData = await FilterSGData(sgData);
+    this.props.handler({data: sgGoatXData, sku: window.sku})
   }
 
   clearInput() {
