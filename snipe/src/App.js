@@ -16,7 +16,6 @@ class App extends React.Component {
   }
 
   handler(newState){
-    console.log(newState.data)
     this.setState({
       data: newState.data,
       sku: newState.sku
@@ -27,7 +26,7 @@ class App extends React.Component {
     return (
     <div className = "App">
       <section className = "SearchBar">
-          <SearchBar placeholder = "Enter a SKU" table = {this.table} handler = {this.handler}/>
+          <SearchBar placeholder = "Find a sneaker..." table = {this.table} handler = {this.handler}/>
       </section>
       <section className = "StockX">
         <DataComp data = {this.state.data} sku = {this.state.sku}/>

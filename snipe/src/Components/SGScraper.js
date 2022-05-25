@@ -40,5 +40,16 @@ export async function FilterSGData(unfilData){
         window.newDataStorageModel[size]["sg"] = sizePriceData
     }
 
+    let allSizes = Object.keys(window.newDataStorageModel);
+    for (let i = 0; i < allSizes.length; i++){
+        let size = allSizes[i]
+        if (!("sg" in window.newDataStorageModel[size])){
+            window.newDataStorageModel[size]["sg"] = {
+            "highestBid" : "n/a",
+            "lowestAsk"  : "n/a"
+        }
+        }
+    }
+
     return window.newDataStorageModel
 }   

@@ -30,12 +30,16 @@ class SearchBar extends React.Component {
     console.log(firstProduct)
     
     let unfilteredXData = await GetPricesX(firstProduct)
-    let [shoeFacts,sku] = GetSkuX(unfilteredXData);
-    console.log(sku,shoeFacts)
+    let [shoeFacts, multiSku] = GetSkuX(unfilteredXData);
+    console.log(multiSku,shoeFacts)
+    multiSku = multiSku.split('/')
+    let sku = multiSku[multiSku.length - 1]
     let stockXPrices = await FilterDataX(unfilteredXData);
     
     //Goat code for calling functions that find product and find product data
     let goatJSON = await FindProductGoat(sku);
+    console.log("here")
+    console.log(goatJSON);
     let goatID = GetIDGoat(goatJSON);
     let goatXData = await FilterDataGoat(goatID)
 
@@ -67,8 +71,6 @@ class SearchBar extends React.Component {
           </form>
         </section>
       </div>
-
-    
     )
   }
 }
