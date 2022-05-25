@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import SearchBar from './Components/SearchBar';
+import DataComp from './Components/DataComp';
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+class App extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      data: window.newDataStorageModel,
+      sku: window.SKU
+    }
+
+    this.handler = this.handler.bind(this)
+  }
+
+  handler(newState){
+    this.setState({
+      data: newState.data,
+      sku: newState.sku
+    })
+  }
+
+  render(){
+    return (
+    <div className = "App">
+      <section className = "SearchBar">
+          <SearchBar placeholder = "Find a sneaker..." table = {this.table} handler = {this.handler}/>
+      </section>
+      <section className = "StockX">
+        <DataComp data = {this.state.data} sku = {this.state.sku}/>
+      </section>
     </div>
-  );
+    )
+  }
 }
 
-export default App;
+export default App
