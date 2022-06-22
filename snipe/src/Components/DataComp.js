@@ -8,17 +8,17 @@ class DataComp extends React.Component{
         this.state = {
             data: this.props.data,
             sku: this.props.sku,
-            sizeList: [4]
+            sizeList: []
         }
-
         this.colNames = ["Size","X Highest Bid","X Lowest Ask", "G Highest Bid", "G Lowest Ask","SG Min","SG High"];
     }
     
     componentWillReceiveProps(nextProps) {
         
-        let sizeList = Object.keys(nextProps.data).map(Number).sort(function(a, b) {
+        let sizeList = Object.keys(nextProps.data).sort(function(a, b) {
             return a - b;
         });
+        console.log("setting state",this.state);
         this.setState({
             data: nextProps.data,
             sku: nextProps.sku,
