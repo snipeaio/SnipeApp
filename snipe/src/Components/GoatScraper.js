@@ -26,7 +26,7 @@ export function SizeDataRequestGoat(goatID,size){
             redirect: 'follow'
     };
 
-    const request = new Request(`http://localhost:2020/${goatID}?size=${size}`, requestOptions)
+    const request = new Request(`http://localhost:2020/goat?size=${size}&name=${goatID}`, requestOptions)
     
     async function getSizeData(){
         let response = await fetch(request);
