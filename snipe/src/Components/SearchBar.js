@@ -25,6 +25,8 @@ class SearchBar extends React.Component {
 
     //StockX code for calling functions that find product and find product data
     let responseJSON = await FindProductX(this.state.value)
+    
+    console.log("this is responseJSON",responseJSON)
     let firstProduct = responseJSON['Products'][0];
     window.product = firstProduct;
     console.log(firstProduct)
