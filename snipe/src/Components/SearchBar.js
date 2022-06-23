@@ -23,6 +23,7 @@ class SearchBar extends React.Component {
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
 
+    window.newDataStorageModel = {};
     //StockX code for calling functions that find product and find product data
     let responseJSON = await FindProductX(this.state.value)
     
@@ -43,6 +44,7 @@ class SearchBar extends React.Component {
     console.log("here")
     console.log(goatJSON);
     let goatID = GetIDGoat(goatJSON);
+    
     let goatXData = await FilterDataGoat(goatID)
 
     let sgData = await DataRequestSG(sku);

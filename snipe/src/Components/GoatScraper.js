@@ -43,7 +43,7 @@ export async function FilterDataGoat(goatID){
     
     for(let i = 0; i < sizes.length; i++){
         let unfilData = await SizeDataRequestGoat(goatID,sizes[i]);
-
+        console.log(unfilData);
         var highestBid;
         var lowestAsk;
         try{
